@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /bootstrap
+Disallow: /css
+Disallow: /js
+Disallow: /dist
+Disallow: /font
+Disallow: /img
+Disallow: /plugins
+Disallow: /system
+Disallow: /tmp
+Disallow: /uploads
+Sitemap: http://myrusakov.ru/sitemap.xml
+Host: myrusakov.ru
