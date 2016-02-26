@@ -25,6 +25,9 @@
     <!--[if IE 7]>
     <link rel="stylesheet" href="/font/css/fontello-ie7.css" ><![endif]-->
 
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="/plugins/grid/css/component.css" />
 	
 	<!-- Custom CSS -->

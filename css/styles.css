@@ -70,7 +70,8 @@ blockquote .btn {
   width: 160px;
 }
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Montserrat', sans-serif;*/
   font-size: 17px;
 }
 h1,
@@ -80,7 +81,8 @@ h4,
 h5,
 h6 {
   color: #281c4c;
-  font-family: 'Bree Serif', sans-serif;
+  font-family: 'Lobster', cursive;
+  /*font-family: 'Bree Serif', sans-serif;*/
   margin-top: 0;
   letter-spacing: 1px;
 }
