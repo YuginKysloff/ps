@@ -49,63 +49,6 @@ class Templates_model extends CI_Model {
                         VALUES ('$date', '$ip', '$host', '$url', '$referer', '$agent')");
     }
 
-
-//    Basket section start ------------------------------------------------------------------------------
-
-    public function basket_init()
-    {
-        if(!isset($_COOKIE['psb']))
-        {
-            $basket = array('orderid' => uniqid());
-            $this->save_basket($basket);
-            $this->session->set_userdata('basket', $basket);
-            $this->session->set_userdata('count', 0);
-//            print_r($this->session->all_userdata());
-        }
-        else
-        {
-            $basket = unserialize(base64_decode($_COOKIE['psb']));
-            $count = count($basket)-1;
-            $this->session->set_userdata('basket', $basket);
-            $this->session->set_userdata('count', $count);
-//            print_r($this->session->all_userdata());
-        }
-    }
-
-    public function get_basket()
-    {
-        $basket = $this->session->userdata('basket');
-        $basket = array_keys($basket);
-        $basket_id = array_shift($basket);
-        $query = $this->db->where_in('pet_id',$basket)->get('pets')->result_array();
-        return $query;
-    }
-
-    public function save_basket($basket)
-    {
-        $bask = base64_encode(serialize($basket));
-        setcookie('psb', $bask, 0X7FFFFFFF,'/');
-    }
-
-    public function add2basket($pet_id)
-    {
-        $basket = $this->session->userdata('basket');
-        $basket[$pet_id] = 1;
-        $this->save_basket($basket);
-        $this->session->set_userdata('basket', $basket);
-
-    }
-
-    public function del_pet($pet_id)
-    {
-        $basket = $this->session->userdata('basket');
-        unset($basket[$pet_id]);
-        $this->save_basket($basket);
-        $this->session->set_userdata('basket', $basket);
-    }
-//    Basket section end ---------------------------------------------------------------------------------
-
-
     // for body ========================================================================================================
     //get slides for main slider ---------------------------------------------------------------------------------------
     public function get_slides()
@@ -119,13 +62,13 @@ class Templates_model extends CI_Model {
         return $query = $this->db->where('diplom_status',1)->get('diploms')->result_array();
     }
 
-    public function get_pets($pet_id = FALSE, $limit = 10, $offset = 0)
+    public function get_dogs($dog_id = FALSE, $limit = 10, $offset = 0)
     {
-        if($pet_id === FALSE)
+        if($dog_id === FALSE)
         {
-            return $query = $this->db->limit($limit, $offset)->get('pets')->result_array();
+            return $query = $this->db->limit($limit, $offset)->get('dogs')->result_array();
         }
-        return $query = $this->db->where('pet_id', $pet_id)->get('pets')->row_array();
+        return $query = $this->db->where('dog_id', $dog_id)->get('dogs')->row_array();
     }
 
     //Calls section start ------------------------------------------------------------------------------

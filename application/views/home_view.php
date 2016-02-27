@@ -66,26 +66,23 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-xs-12"><h2>Наши щенки</h2></div>
+				<div class="col-xs-12"><h2>Наши собаки</h2></div>
 			</div>
 
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="grid">
 						<ul>
-							<? foreach($pets as $item):?>
-								<li class="<? if($item['pet_gender'] == 0) echo 'famale'; else echo 'male';?>">
-									<a href="/pets">
+							<? foreach($dogs as $item):?>
+								<li class="<? if($item['dog_gender'] == 0) echo 'famale'; else echo 'male';?>">
+									<a href="/dogs">
 										<div class="more">
 											<i class="icon-search pull-right"></i>
-											<span class="price"><?=$item['pet_price'];?> руб.</span>
-											<span class="wks"><?=round((time() - $item['pet_birthday'])/604800, 1);?> нед</span>
-											<span class="txt"><? if($item['pet_gender'] == 0) echo 'девочка'; else echo 'мальчик';?></span>
+<!--											<span class="wks">--><?// if($item['dog_gender'] == 0) echo 'девочка'; else echo 'мальчик';?><!--</span>-->
+											<span class="wks"><?=$item['dog_breed'];?></span>
 										</div>
-										<?if($item['pet_discount'] == 1) echo '<span class="tag sale"><span>sale</span></span>';?>
-										<?if($item['pet_status'] == 0) echo '<span class="tag sold"><span>sold</span></span>';?>
-										<img src="<?=$item['pet_img'];?>" alt="<?=$item['pet_breed'];?>"/>
-										<span class="name"><?=$item['pet_breed'];?></span>
+										<img src="<?=$item['dog_img'];?>" alt="<?=$item['dog_name'];?>"/>
+										<span class="name"><?=$item['dog_name'];?></span>
 									</a>
 								</li>
 							<?endforeach;?>
@@ -107,8 +104,8 @@
 				<? foreach($services as $item):?>
 					<div class="row service first">
 						<div class="col-md-7">
-							<h2><?= $item['serv_name'];?></h2>
-							<?= $item['serv_desc'];?>
+							<h3><?= $item['serv_name'];?></h3>
+							<?= character_limiter($item['serv_desc'],300);?>
 						</div>
 						<div class="col-md-5">
 							<img src="<?= $item['serv_img'];?>" alt="<?= $item['serv_name'];?>">
@@ -118,37 +115,5 @@
 			</div>
 		</article>
 		<!-- end Our Services -->
-
-
-		<!-- Coupons -->
-<!--		<article class="coupons">-->
-<!--			<div class="container">-->
-<!--				<header><h2>Акционные купоны</h2></header>-->
-<!--				-->
-<!--				<div class="row">-->
-<!--					<div class="title">-->
-<!--						<div class="centered"><div><h2>In-Store Printable Coupons</h2></div></div>-->
-<!--						<p>We offer all of our customers in-store printable coupons that you can only find online on our website. Check back daily for news deals!</p>-->
-<!--						<hr>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--		-->
-<!--				<div class="row coupon">-->
-<!--					<div class="col-sm-4">-->
-<!--						<img src="img/coupons/coupon01.jpg" alt="pet image">-->
-<!--					</div>-->
-<!--					<div class="col-sm-7">-->
-<!--						<span class="expires">expires: 4/11/2014</span>-->
-<!--						<h3>Hand Scissor Haircut</h3>-->
-<!--						<span class="newnumber">Free</span>-->
-<!--						<p>Cats and dogs ejoyment. Our facility was designed to offer your pet the most exclusive and unique experience, a perfect alternative to a caged</p>-->
-<!--						<a href="#" class="btn btn-default">Print Code</a>-->
-<!--					</div>-->
-<!--				</div>-->
-<!---->
-<!--			</div>     -->
-<!--		</article>-->
-		<!-- end Coupons -->
-
 	</section>
 </div>

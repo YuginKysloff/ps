@@ -1,29 +1,29 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pets extends MY_Controller {
+class Dogs extends MY_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
 //        $this->load->model('Pages_model');
-        $this->load->model('Pets_model');
+        $this->load->model('Dogs_model');
         $this->load->library('pagination');
         $this->load->helper('url');
     }
 
     public function index()
     {
-        if($this->input->post('submit'))
-        {
+        if ($this->input->post('submit')) {
             $this->load->library('form_validation');
             $this->load->library('email');
             $this->Templates_model->call_handler();
         }
 
         //Pagination config
-        $config['base_url'] = '/pets/';
-        $config['total_rows'] = $this->Pets_model->count_pets();
+        $config['base_url'] = '/dogs/';
+        $config['total_rows'] = $this->Dogs_model->count_dogs();
         $config['per_page'] = 10;
         $config['uri_segment'] = 2;
         $config['num_links'] = 2;
@@ -54,81 +54,38 @@ class Pets extends MY_Controller {
         $config['num_tag_close'] = '</li>';
         $this->pagination->initialize($config);
         //get pets from db
-        $data['pets'] = $this->Pets_model->get_pets(false, $config['per_page'], (int)$this->uri->segment($config['uri_segment']));
+        $data['dogs'] = $this->Dogs_model->get_dogs(false, $config['per_page'],
+            (int)$this->uri->segment($config['uri_segment']));
 
-        $this->pages_render('pets',$data);
+        $this->pages_render('dogs', $data);
     }
 
     public function single($slug)
     {
-        if($this->input->post('submit'))
-        {
+        if ($this->input->post('submit')) {
             $this->load->library('form_validation');
             $this->load->library('email');
             $this->Templates_model->call_handler();
         }
 
         //get pet's information
-        $data['pet'] = $this->Pets_model->get_pets($slug);
+        $data['dog'] = $this->Dogs_model->get_dogs($slug);
         //check if choosed pet exist
-        if (empty($data['pet']))
-        {
+        if (empty($data['dog'])) {
             redirect('/error', 'redirect');
         }
         //set page title
-        $data['title'] = $data['pet']['pet_name'];
+        $data['title'] = $data['dog']['dog_name'];
         //get random pets set
-        $data['pets'] = $this->Pets_model->rand_pets();
+        $data['dogs'] = $this->Dogs_model->rand_dogs();
         //del record of choosed pet from random pets set
-        foreach($data['pets'] as $key=>$item)
-        {
-            if($item['pet_id'] == $data['pet']['pet_id'])
-            {
-                unset($data['pets'][$key]);
+        foreach ($data['dogs'] as $key => $item) {
+            if ($item['dog_id'] == $data['dog']['dog_id']) {
+                unset($data['dogs'][$key]);
                 break;
             }
         }
 
-        $this->pages_render('pet',$data);
-    }
-
-
-
-    public function cart()
-    {
-        if($this->input->post('submit'))
-        {
-            $this->load->library('form_validation');
-            $this->load->library('email');
-            $this->Templates_model->call_handler();
-        }
-
-        //set page title
-        $data['title'] = 'Ваша корзина';
-        $data['basket'] = $this->Templates_model->get_basket();
-
-        $this->pages_render('cart',$data);
-    }
-
-
-
-    public function add_to_basket($pet_id, $pet_slug)
-    {
-        $this->Templates_model->add2basket($pet_id);
-        $this->session->set_flashdata('msg', 'Товар добавлен в корзину.');
-        redirect('/pets/'.$pet_slug, 'refresh');
-    }
-
-
-
-    public function delete_from_basket($pet_id)
-    {
-        if (!$pet_id)
-        {
-            redirect('/error', 'redirect');
-        }
-
-        $this->Templates_model->del_pet($pet_id);
-        redirect('/pets/cart', 'refresh');
+        $this->pages_render('dog', $data);
     }
 }

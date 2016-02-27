@@ -34,10 +34,10 @@ class Pages_model extends CI_Model {
         return $query = $this->db->where('serv_status',1)->get('services')->result_array();
     }
 
-    //get random pets
-    public function rand_pets()
+    //get random dogs
+    public function rand_dogs()
     {
-        $query = $this->db->get('pets')->result_array();
+        $query = $this->db->get('dogs')->result_array();
         $max = count($query);
         $numbers = range(0, $max-1);
         shuffle($numbers);

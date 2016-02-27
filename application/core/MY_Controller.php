@@ -30,14 +30,6 @@ class MY_Controller extends CI_Controller {
 
         //take statistics
         $this->Templates_model->do_statistics();
-        //take basket
-        $this->Templates_model->basket_init();
-        $data['count'] = $this->session->userdata('count');
-
-//        if($slug=='home' or $slug=='about' or $slug=='pets' or $slug=='services' or $slug=='blog')
-//            $page = 'templates/footer_about_view';
-//        else
-//            $page = 'templates/footer_view';
 
         //render view
         $this->load->view('templates/header_view',$data);

@@ -7,6 +7,7 @@ class Pages extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('Pages_model');
+        $this->load->helper('text');
     }
 
     public function index($slug = 'home')
@@ -28,7 +29,7 @@ class Pages extends MY_Controller {
         $data['slides'] = $this->Pages_model->get_slides();
         $data['diploms'] = $this->Pages_model->get_diploms();
         $data['team'] = $this->Pages_model->get_team();
-        $data['pets'] = $this->Pages_model->rand_pets();
+        $data['dogs'] = $this->Pages_model->rand_dogs();
         $data['services'] = $this->Pages_model->get_services();
 
         $this->pages_render($slug,$data);

@@ -9,15 +9,9 @@ $route['admin/calls/edit_call/(:num)'] = 'admin/calls/edit_call/$1';
 $route['admin/calls/(:any)'] = 'admin/calls/index/$1';
 $route['admin/calls/(:any)/(:num)'] = 'admin/calls/index/$1/$2';
 
-
-$route['blog/(:num)'] = 'blog/index/$1';
-$route['blog/(:any)'] = 'blog/single/$1';
-$route['blog'] = 'blog/index';
-
-$route['pets/cart'] = 'pets/cart';
-$route['pets/(:num)'] = 'pets/index/$1';
-$route['pets/(:any)'] = 'pets/single/$1';
-$route['pets'] = 'pets/index';
+$route['dogs/(:num)'] = 'dogs/index/$1';
+$route['dogs/(:any)'] = 'dogs/single/$1';
+$route['dogs'] = 'dogs/index';
 
 $route['(:any)'] = 'pages/index/$1';
 $route['default_controller'] = 'pages';

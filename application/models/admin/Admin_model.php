@@ -17,11 +17,8 @@ class Admin_model extends CI_Model {
         $count_data['calls'] = $this->db->count_all('calls');
         $count_data['users'] = $this->db->count_all('users')-1;
         $count_data['visitors'] = $this->db->count_all('hits');
-        $count_data['pets'] = $this->db->count_all('pets');
+        $count_data['dogs'] = $this->db->count_all('dogs');
         $count_data['services'] = $this->db->count_all('services');
-        $count_data['cats'] = $this->db->count_all('blog_cats');
-        $count_data['posts'] = $this->db->count_all('blog_posts');
-        $count_data['gallery'] = $this->db->count_all('gallery');
         $count_data['diploms'] = $this->db->count_all('diploms');
         $count_data['team'] = $this->db->count_all('team');
         $count_data['orders'] = $this->db->count_all('orders');
@@ -79,20 +76,12 @@ class Admin_model extends CI_Model {
         $data['set_tags'] = $this->input->post('set_tags');
         $data['set_about_title'] = $this->input->post('set_about_title');
         $data['set_about'] = $this->input->post('set_about');
-        $data['set_shop_title'] = $this->input->post('set_shop_title');
-        $data['set_shop'] = $this->input->post('set_shop');
         $data['set_serv_title'] = $this->input->post('set_serv_title');
         $data['set_serv'] = $this->input->post('set_serv');
-        $data['set_blog_title'] = $this->input->post('set_blog_title');
-        $data['set_blog'] = $this->input->post('set_blog');
         $data['set_address'] = $this->input->post('set_address');
         $data['set_phone'] = $this->input->post('set_phone');
         $data['set_email'] = $this->input->post('set_email');
         $data['set_vk'] = $this->input->post('set_vk');
-//        $data['set_work_start'] = $this->input->post('set_work_start');
-//        $data['set_work_finish'] = $this->input->post('set_work_finish');
-//        $data['set_holiday_start'] = $this->input->post('set_holiday_start');
-//        $data['set_holiday_finish'] = $this->input->post('set_holiday_finish');
         $data['set_slider_order'] = $this->input->post('set_slider_order');
 
         //обновление данных в базе
@@ -203,37 +192,34 @@ class Admin_model extends CI_Model {
     }
 // END SLIDES SECTION ============================================================================================================
 
-// START PETS SECTION ========================================================================================================
-    public function get_pets($pet_id = FALSE)
+// START DOGS SECTION ========================================================================================================
+    public function get_dogs($dog_id = FALSE)
     {
-        if ($pet_id === FALSE)
+        if ($dog_id === FALSE)
         {
-            $query = $this->db->get('pets')->result_array();
+            $query = $this->db->get('dogs')->result_array();
             return $query;
         }
 
-        $query = $this->db->get_where('pets', array('pet_id' => $pet_id))->row_array();
+        $query = $this->db->get_where('dogs', array('dog_id' => $dog_id))->row_array();
         return $query;
     }
 
-    //Create pet --------------------------------------------------------------------------------------------------------------------
-    public function create_pet_handler()
+    //Create dog --------------------------------------------------------------------------------------------------------------------
+    public function create_dog_handler()
     {
         //prepare data for put into database
-        $data['pet_name'] = $this->input->post('pet_name');
-        $data['pet_slug'] = $this->translit($this->input->post('pet_name'));
-        $data['pet_gender'] = $this->input->post('pet_gender');
-        $data['pet_birthday'] = strtotime($this->input->post('pet_birthday'));
-        $data['pet_breed'] = $this->input->post('pet_breed');
-        $data['pet_desc'] = $this->input->post('pet_desc');
-        $data['pet_docs'] = $this->input->post('pet_docs');
-        $data['pet_vactination'] = $this->input->post('pet_vactination');
-        $data['pet_price'] = $this->input->post('pet_price');
-        $data['pet_discount'] = $this->input->post('pet_discount');
-        $data['pet_status'] = $this->input->post('pet_status');
+        $data['dog_name'] = $this->input->post('dog_name');
+        $data['dog_slug'] = $this->translit($this->input->post('dog_name'));
+        $data['dog_gender'] = $this->input->post('dog_gender');
+        $data['dog_birthday'] = strtotime($this->input->post('dog_birthday'));
+        $data['dog_breed'] = $this->input->post('dog_breed');
+        $data['dog_desc'] = $this->input->post('dog_desc');
+        $data['dog_genealogy'] = $this->input->post('dog_genealogy');
+        $data['dog_status'] = $this->input->post('dog_status');
 
         //prepare to download photo
-        $config['upload_path'] = './uploads/pets/';
+        $config['upload_path'] = './uploads/dogs/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
 
@@ -250,32 +236,29 @@ class Admin_model extends CI_Model {
             $this->image_moo->load('.'.$image_url)->resize_crop(270,270)->save('.'.$image_url,TRUE);
 
             //prepare data for inserting into database
-            $data['pet_img'] = $image_url;
+            $data['dog_img'] = $image_url;
         }
         //insert data into database
-        $this->db->insert('pets', $data);
+        $this->db->insert('dogs', $data);
 
-        redirect('/admin/pets', 'refresh');
+        redirect('/admin/dogs', 'refresh');
     }
 
-    //Edit pet --------------------------------------------------------------------------------------------------------------------
-    public function edit_pet_handler($pet_id)
+    //Edit dog --------------------------------------------------------------------------------------------------------------------
+    public function edit_dog_handler($dog_id)
     {
         //prepare data for put into database
-        $data['pet_name'] = $this->input->post('pet_name');
-        $data['pet_slug'] = $this->translit($this->input->post('pet_name'));
-        $data['pet_gender'] = $this->input->post('pet_gender');
-        $data['pet_birthday'] = strtotime($this->input->post('pet_birthday'));
-        $data['pet_breed'] = $this->input->post('pet_breed');
-        $data['pet_desc'] = $this->input->post('pet_desc');
-        $data['pet_docs'] = $this->input->post('pet_docs');
-        $data['pet_vactination'] = $this->input->post('pet_vactination');
-        $data['pet_price'] = $this->input->post('pet_price');
-        $data['pet_discount'] = $this->input->post('pet_discount');
-        $data['pet_status'] = $this->input->post('pet_status');
+        $data['dog_name'] = $this->input->post('dog_name');
+        $data['dog_slug'] = $this->translit($this->input->post('dog_name'));
+        $data['dog_gender'] = $this->input->post('dog_gender');
+        $data['dog_birthday'] = strtotime($this->input->post('dog_birthday'));
+        $data['dog_breed'] = $this->input->post('dog_breed');
+        $data['dog_desc'] = $this->input->post('dog_desc');
+        $data['dog_genealogy'] = $this->input->post('dog_genealogy');
+        $data['dog_status'] = $this->input->post('dog_status');
 
         //prepare to download photo
-        $config['upload_path'] = './uploads/pets/';
+        $config['upload_path'] = './uploads/dogs/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
 
@@ -292,30 +275,30 @@ class Admin_model extends CI_Model {
             $this->image_moo->load('.'.$image_url)->resize_crop(270,270)->save('.'.$image_url,TRUE);
 
             //delete old photo
-            $old_photo = $this->db->where('pet_id', $pet_id)->get('pets')->row_array();
-            unlink('.'.$old_photo['pet_img']);
+            $old_photo = $this->db->where('dog_id', $dog_id)->get('dogs')->row_array();
+            unlink('.'.$old_photo['dog_img']);
 
             //prepare data for inserting into database
-            $data['pet_img'] = $image_url;
+            $data['dog_img'] = $image_url;
         }
         //update database
-        $this->db->where('pet_id',$pet_id)->update('pets', $data);
+        $this->db->where('dog_id',$dog_id)->update('dogs', $data);
 
-        redirect('/admin/pets', 'refresh');
+        redirect('/admin/dogs', 'refresh');
     }
 
-    //Delete pet --------------------------------------------------------------------------------------------------
-    public function del_pet($pet_id)
+    //Delete dog --------------------------------------------------------------------------------------------------
+    public function del_dog($dog_id)
     {
-        $query = $this->db->where('pet_id', $pet_id)->get('pets')->row_array();
-        if($query['pet_img'])
+        $query = $this->db->where('dog_id', $dog_id)->get('dogs')->row_array();
+        if($query['dog_img'])
         {
-            unlink('.'.$query['pet_img']);
+            unlink('.'.$query['dog_img']);
         }
 
-        $this->db->where('pet_id', $pet_id)->delete('pets');
+        $this->db->where('dog_id', $dog_id)->delete('dogs');
     }
-// END PETS SECTION =============================================================================================================
+// END DOGS SECTION =============================================================================================================
 
 // START SERVICES SECTION ========================================================================================================
     public function get_services($serv_id = FALSE)
@@ -418,259 +401,6 @@ class Admin_model extends CI_Model {
         $this->db->where('serv_id', $serv_id)->delete('services');
     }
 // END SERVICES SECTION =============================================================================================================
-
-// START BLOG_CATS SECTION ========================================================================================================
-    public function get_cats($blog_cat_id = FALSE)
-    {
-        if ($blog_cat_id === FALSE)
-        {
-            $query = $this->db->get('blog_cats')->result_array();
-            return $query;
-        }
-
-        $query = $this->db->get_where('blog_cats', array('blog_cat_id' => $blog_cat_id))->row_array();
-        return $query;
-    }
-
-//Create category --------------------------------------------------------------------------------------------------------------------
-    public function create_cat_handler()
-    {
-        //готовим данные для записи в базу
-        $data['blog_cat_name'] = $this->input->post('blog_cat_name');
-        $data['blog_cat_slug'] = $this->translit($this->input->post('blog_cat_name'));
-        $data['blog_cat_status'] = $this->input->post('blog_cat_status');
-
-        //обновление данных в базе
-        $this->db->insert('blog_cats', $data);
-
-        redirect('/admin/cats', 'refresh');
- }
-
- //Edit category --------------------------------------------------------------------------------------------------------------------
-    public function edit_cat_handler($blog_cat_id)
-    {
-        //готовим данные для записи в базу
-        $data['blog_cat_name'] = $this->input->post('blog_cat_name');
-        $data['blog_cat_slug'] = $this->translit($this->input->post('blog_cat_name'));
-        $data['blog_cat_status'] = $this->input->post('blog_cat_status');
-
-        //обновление данных в базе
-        $this->db->where('blog_cat_id',$blog_cat_id)->update('blog_cats', $data);
-
-        redirect('/admin/cats', 'refresh');
- }
-
-  //Delete category --------------------------------------------------------------------------------------------------
-    public function del_cat($blog_cat_id)
-    {
-        $this->db->where('blog_cat_id', $blog_cat_id)->delete('blog_cats');
-    }
-// END BLOG_CATS SECTION ==========================================================================================================
-
-// START BLOG_POSTS SECTION ========================================================================================================
-    public function get_posts($blog_post_id = FALSE)
-    {
-        if ($blog_post_id === FALSE)
-        {
-            $query = $this->db->query("SELECT blog_posts.blog_post_id,
-                                              blog_cats.blog_cat_name,
-                                              blog_posts.blog_post_date,
-                                              blog_posts.blog_post_title,
-                                              blog_posts.blog_post_img,
-                                              blog_posts.blog_post_status
-                                        FROM blog_posts, blog_cats
-                                        WHERE blog_posts.blog_post_cat_id = blog_cats.blog_cat_id")->result_array();
-            return $query;
-        }
-
-        $query = $this->db->get_where('blog_posts', array('blog_post_id' => $blog_post_id))->row_array();
-        return $query;
-    }
-
-//Create post --------------------------------------------------------------------------------------------------------------------
-    public function create_post_handler()
-    {
-        //prepare data for put into database
-        $data['blog_post_cat_id'] = $this->input->post('blog_post_cat_id');
-        $data['blog_post_title'] = $this->input->post('blog_post_title');
-        $data['blog_post_slug'] = $this->translit($this->input->post('blog_post_title'));
-        $data['blog_post_article'] = $this->input->post('blog_post_article');
-        $data['blog_post_date'] = time();
-        $data['blog_post_status'] = $this->input->post('blog_post_status');
-
-        //prepare to download photo
-        $config['upload_path'] = './uploads/blog/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['overwrite'] = FALSE;
-
-        $this->load->library('upload', $config);
-
-        if($this->upload->do_upload('userfile'))
-        {
-            $image_dir = str_replace('.', '', $config['upload_path']);
-            $temp = $this->upload->data();
-            $file_name = $temp['file_name'];
-            $image_url = $image_dir.$file_name;
-
-            //resize photo
-            $this->image_moo->load('.'.$image_url)->resize_crop(800,600)->save('.'.$image_url,TRUE);
-
-            //prepare data for inserting into database
-            $data['blog_post_img'] = $image_url;
-        }
-        //insert data into database
-        $this->db->insert('blog_posts', $data);
-
-        redirect('/admin/posts', 'refresh');
-    }
-
-    //Edit post --------------------------------------------------------------------------------------------------------------------
-    public function edit_post_handler($blog_post_id)
-    {
-        //prepare data for put into database
-        $data['blog_post_cat_id'] = $this->input->post('blog_post_cat_id');
-        $data['blog_post_title'] = $this->input->post('blog_post_title');
-        $data['blog_post_slug'] = $this->translit($this->input->post('blog_post_title'));
-        $data['blog_post_article'] = $this->input->post('blog_post_article');
-        $data['blog_post_date'] = time();
-        $data['blog_post_status'] = $this->input->post('blog_post_status');
-
-        //prepare to download photo
-        $config['upload_path'] = './uploads/blog/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['overwrite'] = FALSE;
-
-        $this->load->library('upload', $config);
-
-        if($this->upload->do_upload('userfile'))
-        {
-            $image_dir = str_replace('.', '', $config['upload_path']);
-            $temp = $this->upload->data();
-            $file_name = $temp['file_name'];
-            $image_url = $image_dir.$file_name;
-
-            //resize photo
-            $this->image_moo->load('.'.$image_url)->resize_crop(800,600)->save('.'.$image_url,TRUE);
-
-            //delete old photo
-            $old_photo = $this->db->query("SELECT * FROM blog_posts WHERE blog_post_id = $blog_post_id")->row_array();
-            unlink('.'.$old_photo['blog_post_img']);
-
-            //prepare data for inserting into database
-            $data['blog_post_img'] = $image_url;
-        }
-        //update database
-        $this->db->where('blog_post_id',$blog_post_id)->update('blog_posts', $data);
-
-        redirect('/admin/posts', 'refresh');
-    }
-
-    //Delete post --------------------------------------------------------------------------------------------------
-    public function del_post($blog_post_id)
-    {
-        $query = $this->db->where('blog_post_id', $blog_post_id)->get('blog_posts')->row_array();
-        if($query['blog_post_img'])
-        {
-            unlink('.'.$query['blog_post_img']);
-        }
-
-        $this->db->where('blog_post_id', $blog_post_id)->delete('blog_posts');
-    }
-// END BLOG_POSTS SECTION =============================================================================================================
-
-// START GALLERY SECTION ============================================================================================================
-    public function get_gallery($gal_id = FALSE)
-    {
-        if ($gal_id === FALSE)
-        {
-            $query = $this->db->get('gallery')->result_array();
-            return $query;
-        }
-
-        $query = $this->db->where('gal_id', $gal_id)->get('gallery')->row_array();
-        return $query;
-    }
-
-//Create image --------------------------------------------------------------------------------------------------------------------
-    public function create_img_handler()
-    {
-        //готовим данные для записи в базу
-        $data['gal_name'] = $this->input->post('gal_name');
-
-        //подготовка загрузки фото
-        $config['upload_path'] = './uploads/gallery/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['overwrite'] = FALSE;
-
-        $this->load->library('upload', $config);
-
-        if($this->upload->do_upload('userfile'))
-        {
-            $image_dir = str_replace('.', '', $config['upload_path']);
-            $temp = $this->upload->data();
-            $file_name = $temp['file_name'];
-            $image_url = $image_dir.$file_name;
-
-            //ресайз фото
-            $this->image_moo->load('.'.$image_url)->resize(800)->save('.'.$image_url,TRUE);
-
-            //готовим данные для записи в базу
-            $data['gal_img'] = $image_url;
-        }
-
-        //обновление данных в базе
-        $this->db->insert('gallery', $data);
-
-        redirect('/admin/gallery', 'refresh');
- }
-
-//Edit image --------------------------------------------------------------------------------------------------------------------
-    public function edit_img_handler($gal_id)
-    {
-        //готовим данные для записи в базу
-        $data['gal_name'] = $this->input->post('gal_name');
-
-        //подготовка загрузки фото
-        $config['upload_path'] = './uploads/gallery/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['overwrite'] = FALSE;
-
-        $this->load->library('upload', $config);
-
-        if($this->upload->do_upload('userfile'))
-        {
-            $image_dir = str_replace('.', '', $config['upload_path']);
-            $temp = $this->upload->data();
-            $file_name = $temp['file_name'];
-            $image_url = $image_dir.$file_name;
-
-            //ресайз фото
-            $this->image_moo->load('.'.$image_url)->resize(800)->save('.'.$image_url,TRUE);
-
-            //удаляем старые фото
-            $old_photo = $this->db->query("SELECT * FROM gallery WHERE gal_id = $gal_id")->row_array();
-            unlink('.'.$old_photo['gal_img']);
-
-            //готовим данные для записи в базу
-            $data['gal_img'] = $image_url;
-        }
-
-        //обновление данных в базе
-        $this->db->where('gal_id',$gal_id)->update('gallery', $data);
-
-        redirect('/admin/gallery', 'refresh');
- }
-
- //Delete image --------------------------------------------------------------------------------------------------
-    public function del_img($gal_id)
-    {
-        $query = $this->db->where('gal_id', $gal_id)->get('gallery')->row_array();
-
-        unlink('.'.$query['gal_img']);
-
-        $this->db->where('gal_id', $gal_id)->delete('gallery');
-    }
-// END GALLERY SECTION ==============================================================================================================
 
 // START DIPLOMS SECTION ==========================================================================================================
     public function get_diploms($diplom_id = FALSE)
@@ -1040,75 +770,5 @@ class Admin_model extends CI_Model {
         redirect('/admin/menu', 'refresh');
     }
 // END MENU SECTION ==========================================================================================================
-
-// START ORDERS SECTION ===========================================================================================================
-    public function get_orders($mode, $offset, $limit, $order_id = FALSE, $counter = 0)
-    {
-        if ($order_id === FALSE AND $counter == 0)
-        {
-            $offset = (int)$this->uri->segment($offset);
-            switch ($mode)
-            {
-                case 'unfinished':
-                    // $query = $this->db->query("SELECT * FROM calls WHERE call_status = 0 LIMIT $offset, $limit ORDER BY call_date desc")->result_array();
-                    $query = $this->db->where('order_status',0)->limit($limit, $offset)->order_by('order_date','desc')->get('orders')->result_array();
-                    break;
-                case 'finished':
-                    // $query = $this->db->query("SELECT * FROM calls WHERE call_status = 1 LIMIT $offset, $limit ORDER BY call_date desc")->result_array();
-                    $query = $this->db->where('order_status',1)->limit($limit, $offset)->order_by('order_date','desc')->get('orders')->result_array();
-                    break;
-                case 'expired':
-                    $date = time()-86400;
-                    // $query = $this->db->query("SELECT * FROM calls WHERE call_date < $time AND call_status = 0 LIMIT $offset, $limit ORDER BY call_date desc")->result_array();
-                    $query = $this->db->where('order_status',0)->where('order_date <',$date)->limit($limit, $offset)->order_by('order_date','desc')->get('orders')->result_array();
-                    break;
-                default:
-                    $query = $this->db->limit($limit, $offset)->order_by('order_date','desc')->get('orders')->result_array();
-            }//End switch
-            return $query;
-        }
-        elseif($order_id === FALSE AND $counter == 1)
-        {
-            switch ($mode)
-            {
-                case 'unfinished':
-                    $query = $this->db->where('order_status',0)->count_all_results('orders');
-                    break;
-                case 'finished':
-                    $query = $this->db->where('order_status',1)->count_all_results('orders');
-                    break;
-                case 'expired':
-                    $date = time()-86400;
-                    $query = $this->db->where('order_status',0)->where('order_date <',$date)->count_all_results('orders');
-                    break;
-                default:
-                    $query = $this->db->count_all('orders');
-            }//End switch
-            return $query;
-        }
-        else
-        {
-            $query = $this->db->where('order_id', $order_id)->get('orders')->row_array();
-            return $query;
-        }
-
-    }
-
-    public function edit_order_handler($order_id)
-    {
-        //готовим данные для записи в базу
-        $data['order_notes'] = $this->input->post('order_notes');
-        $data['order_status'] = $this->input->post('order_status');
-
-        //обновление данных в базе
-        $this->db->where('order_id',$order_id)->update('orders', $data);
-    }
-
-    //Delete order --------------------------------------------------------------------------------------------------
-    public function del_order($order_id)
-    {
-        $this->db->where('order_id', $order_id)->delete('orders');
-    }
-// END ORDERS SECTION =============================================================================================================
 
 }

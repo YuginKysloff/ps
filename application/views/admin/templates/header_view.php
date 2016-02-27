@@ -82,12 +82,6 @@
               </a>
             </li>
             <li <?if($this->uri->segment(2) == 'calls'):?>class="active"<?endif?>>
-              <a href="/admin/orders">
-                <i class="fa fa-envelope-o"></i> <span>Заказы</span>
-                <small class="label pull-right bg-blue"><?php echo $count['orders'];?></small>
-              </a>
-            </li>
-            <li <?if($this->uri->segment(2) == 'calls'):?>class="active"<?endif?>>
               <a href="/admin/calls">
                 <i class="fa fa-phone"></i> <span>Запросы звонков</span>
                 <small class="label pull-right bg-blue"><?php echo $count['calls'];?></small>
@@ -99,16 +93,16 @@
                 <small class="label pull-right bg-blue"><?php echo $count['users'];?></small>
               </a>
             </li>
-            <li class="treeview <?if(($this->uri->segment(2) == 'pets') OR ($this->uri->segment(2) == 'services')):?>active<?endif?>">
+            <li class="treeview <?if(($this->uri->segment(2) == 'dogs') OR ($this->uri->segment(2) == 'services')):?>active<?endif?>">
               <a href="#">
                 <i class="fa fa-shopping-cart"></i> <span>Каталог</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul style="display: none;" class="treeview-menu">
                 <li>
-                  <a href="/admin/pets">
+                  <a href="/admin/dogs">
                     <i class="fa fa-circle-o"></i> <span>Животные</span>
-                    <small class="label pull-right bg-blue"><?php echo $count['pets'];?></small>
+                    <small class="label pull-right bg-blue"><?php echo $count['dogs'];?></small>
                   </a>
                 </li>
                 <li class="">
@@ -119,35 +113,6 @@
                 </li>
               </ul>
             </li>
-            <li class="treeview <?if(($this->uri->segment(2) == 'posts')
-                                OR ($this->uri->segment(2) == 'cats')
-                                OR ($this->uri->segment(2) == 'gallery')):?>active<?endif?>">
-              <a href="#">
-                <i class="fa fa-book"></i> <span>Блог</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul style="display: none;" class="treeview-menu">
-                <li>
-                  <a href="/admin/cats">
-                    <i class="fa fa-circle-o"></i> <span>Категории</span>
-                    <small class="label pull-right bg-blue"><?php echo $count['cats'];?></small>
-                  </a>
-                </li>
-                <li class="">
-                  <a href="/admin/posts">
-                    <i class="fa fa-circle-o"></i> <span>Статьи</span>
-                    <small class="label pull-right bg-blue"><?php echo $count['posts'];?></small>
-                  </a>
-                </li>
-<!--                <li class="">-->
-<!--                  <a href="/admin/gallery">-->
-<!--                    <i class="fa fa-circle-o"></i> <span>Галерея</span>-->
-<!--                    <small class="label pull-right bg-blue">--><?php //echo $count['gallery'];?><!--</small>-->
-<!--                  </a>-->
-<!--                </li>-->
-              </ul>
-            </li>
-
             <li class="treeview <?if(($this->uri->segment(2) == 'about')
                 OR ($this->uri->segment(2) == 'slides')
                 OR ($this->uri->segment(2) == 'diploms')):?>active<?endif?>">

@@ -5,7 +5,7 @@
         <article class="puppies">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12"><h2>Наши щенки</h2></div>
+                    <div class="col-xs-12"><h2>Наши собаки</h2></div>
                 </div>
 
 
@@ -25,21 +25,16 @@
                     <div class="col-md-12">
                         <div class="grid">
                             <ul>
-                                <? foreach($pets as $item):?>
-                                    <li class="<? if($item['pet_gender'] == 0) echo 'famale'; else echo 'male';?>
-                                    <? if($item['pet_discount'] == 1) echo 'feature';?>
-                                    <? if($item['pet_status'] == 0) echo 'top';?>">
-                                        <a href="/pets/<?=$item['pet_slug'];?>">
+                                <? foreach($dogs as $item):?>
+                                    <li class="<? if($item['dog_gender'] == 0) echo 'famale'; else echo 'male';?>">
+                                        <a href="/dogs/<?=$item['dog_slug'];?>">
                                             <div class="more">
                                                 <i class="icon-search pull-right"></i>
-                                                <span class="price"><?=$item['pet_price'];?> руб.</span>
-                                                <span class="wks"><?=round((time() - $item['pet_birthday'])/604800, 1);?> нед</span>
-                                                <span class="txt"><? if($item['pet_gender'] == 0) echo 'девочка'; else echo 'мальчик';?></span>
+                                                <!--											<span class="wks">--><?// if($item['dog_gender'] == 0) echo 'девочка'; else echo 'мальчик';?><!--</span>-->
+                                                <span class="wks"><?=$item['dog_breed'];?></span>
                                             </div>
-                                            <?if($item['pet_discount'] == 1) echo '<span class="tag sale"><span>sale</span></span>';?>
-                                            <?if($item['pet_status'] == 0) echo '<span class="tag sold"><span>sold</span></span>';?>
-                                            <img src="<?=$item['pet_img'];?>" alt="<?=$item['pet_breed'];?>"/>
-                                            <span class="name"><?=$item['pet_name'];?></span>
+                                            <img src="<?=$item['dog_img'];?>" alt="<?=$item['dog_name'];?>"/>
+                                            <span class="name"><?=$item['dog_name'];?></span>
                                         </a>
                                     </li>
                                 <?endforeach;?>
