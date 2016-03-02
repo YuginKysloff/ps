@@ -31,7 +31,7 @@
                                             <div class="more">
                                                 <i class="icon-search pull-right"></i>
                                                 <!--											<span class="wks">--><?// if($item['dog_gender'] == 0) echo 'девочка'; else echo 'мальчик';?><!--</span>-->
-                                                <span class="wks"><?=$item['dog_breed'];?></span>
+                                                <span class="wks"><?=$item['breed_name'];?></span>
                                             </div>
                                             <img src="<?=$item['dog_img'];?>" alt="<?=$item['dog_name'];?>"/>
                                             <span class="name"><?=$item['dog_name'];?></span>

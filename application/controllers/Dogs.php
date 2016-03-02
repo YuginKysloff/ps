@@ -74,6 +74,11 @@ class Dogs extends MY_Controller
         if (empty($data['dog'])) {
             redirect('/error', 'redirect');
         }
+
+//        echo '<pre>';
+//        print_r($data);
+//        die;
+
         //set page title
         $data['title'] = $data['dog']['dog_name'];
         //get random pets set
