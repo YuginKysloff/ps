@@ -8,17 +8,19 @@
                     <div class="col-xs-12"><h2>Наши собаки</h2></div>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <ul class="filters">
-                            <li data-filter="all" class="active">Все</li>
-                            <li data-filter="male">Мальчики</li>
-                            <li data-filter="famale">Девочки</li>
-                            <li data-filter="feature">Распродажа</li>
-                            <li data-filter="top">Резерв</li>
-                        </ul>
-                    </div>
+                <div class="row tab">
+                    <ul class="nav nav-tabs">
+                        <li <?php if (((string)$this->uri->segment(2) === 'all') OR ((string)$this->uri->segment(2) === '')): ?>class="active"<?php endif; ?>>
+                            <a href="/dogs/all">Все</a>
+                        </li>
+                        <? foreach($breeds as $item):?>
+                            <li <?php if (((string)$this->uri->segment(2) === $item['breed_slug'])): ?>class="active"<?php endif; ?>>
+                                <a href="/dogs/<?= $item['breed_slug'];?>">
+                                    <?= $item['breed_name'];?>
+                                </a>
+                            </li>
+                        <? endforeach;?>
+                    </ul>
                 </div>
 
                 <div class="row">
@@ -27,7 +29,7 @@
                             <ul>
                                 <? foreach($dogs as $item):?>
                                     <li class="<? if($item['dog_gender'] == 0) echo 'famale'; else echo 'male';?>">
-                                        <a href="/dogs/<?=$item['dog_slug'];?>">
+                                        <a href="/dogs/single/<?=$item['dog_slug'];?>">
                                             <div class="more">
                                                 <i class="icon-search pull-right"></i>
                                                 <!--											<span class="wks">--><?// if($item['dog_gender'] == 0) echo 'девочка'; else echo 'мальчик';?><!--</span>-->

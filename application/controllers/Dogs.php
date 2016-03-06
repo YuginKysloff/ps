@@ -13,7 +13,7 @@ class Dogs extends MY_Controller
         $this->load->helper('url');
     }
 
-    public function index()
+    public function index($mode = 'all')
     {
         if ($this->input->post('submit')) {
             $this->load->library('form_validation');
@@ -54,8 +54,9 @@ class Dogs extends MY_Controller
         $config['num_tag_close'] = '</li>';
         $this->pagination->initialize($config);
         //get pets from db
-        $data['dogs'] = $this->Dogs_model->get_dogs(false, $config['per_page'],
+        $data['dogs'] = $this->Dogs_model->get_dogs($mode, false, $config['per_page'],
             (int)$this->uri->segment($config['uri_segment']));
+        $data['breeds'] = $this->Dogs_model->get_breeds();
 
         $this->pages_render('dogs', $data);
     }
@@ -69,7 +70,7 @@ class Dogs extends MY_Controller
         }
 
         //get pet's information
-        $data['dog'] = $this->Dogs_model->get_dogs($slug);
+        $data['dog'] = $this->Dogs_model->get_dogs(FALSE, $slug);
         //check if choosed pet exist
         if (empty($data['dog'])) {
             redirect('/error', 'redirect');

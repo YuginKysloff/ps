@@ -26,4 +26,8 @@ class Error extends MY_Controller
 //        $this->load->view('errors/html/error_404', $data);
     }
 
+
+
+
+
 }

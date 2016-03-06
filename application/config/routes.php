@@ -9,8 +9,9 @@ $route['admin/calls/edit_call/(:num)'] = 'admin/calls/edit_call/$1';
 $route['admin/calls/(:any)'] = 'admin/calls/index/$1';
 $route['admin/calls/(:any)/(:num)'] = 'admin/calls/index/$1/$2';
 
-$route['dogs/(:num)'] = 'dogs/index/$1';
-$route['dogs/(:any)'] = 'dogs/single/$1';
+$route['dogs/single/(:any)'] = 'dogs/single/$1';
+$route['dogs/(:any)/(:num)'] = 'dogs/index/$1/$2';
+$route['dogs/(:any)'] = 'dogs/index/$1';
 $route['dogs'] = 'dogs/index';
 
 $route['(:any)'] = 'pages/index/$1';

@@ -1,6 +1,5 @@
 <div>
     <section>
-
         <!-- Our Services -->
         <article class="services">
             <div class="container">
