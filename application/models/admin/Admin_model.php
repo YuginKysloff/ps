@@ -207,11 +207,6 @@ class Admin_model extends CI_Model {
         return $query;
     }
 
-    public function get_breeds()
-    {
-        return $query = $this->db->get('breeds')->result_array();
-    }
-
     //Create dog --------------------------------------------------------------------------------------------------------------------
     public function create_dog_handler()
     {
@@ -778,4 +773,51 @@ class Admin_model extends CI_Model {
     }
 // END MENU SECTION ==========================================================================================================
 
+// START BREEDS SECTION ========================================================================================================
+    public function get_breeds($breed_id = FALSE)
+    {
+        if ($breed_id === FALSE)
+        {
+            $query = $this->db->get('breeds')->result_array();
+            return $query;
+        }
+
+        $query = $this->db->get_where('breeds', array('breed_id' => $breed_id))->row_array();
+        return $query;
+    }
+
+//Create breed --------------------------------------------------------------------------------------------------------------------
+    public function create_breed_handler()
+    {
+        //готовим данные для записи в базу
+        $data['breed_name'] = $this->input->post('breed_name');
+        $data['breed_slug'] = $this->translit($this->input->post('breed_name'));
+        $data['breed_status'] = $this->input->post('breed_status');
+
+        //обновление данных в базе
+        $this->db->insert('breeds', $data);
+
+        redirect('/admin/breeds', 'refresh');
+    }
+
+    //Edit breed --------------------------------------------------------------------------------------------------------------------
+    public function edit_breed_handler($breed_id)
+    {
+        //готовим данные для записи в базу
+        $data['breed_name'] = $this->input->post('breed_name');
+        $data['breed_slug'] = $this->translit($this->input->post('breed_name'));
+        $data['breed_status'] = $this->input->post('breed_status');
+
+        //обновление данных в базе
+        $this->db->where('breed_id',$breed_id)->update('breeds', $data);
+
+        redirect('/admin/breeds', 'refresh');
+    }
+
+    //Delete breed --------------------------------------------------------------------------------------------------
+    public function del_breed($breed_id)
+    {
+        $this->db->where('breed_id', $breed_id)->delete('breeds');
+    }
+// END BREEDS SECTION ==========================================================================================================
 }

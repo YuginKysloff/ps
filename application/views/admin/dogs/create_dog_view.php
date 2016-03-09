@@ -23,16 +23,25 @@
                                        type="text" autofocus>
                             </div>
 
-                            <div class="form-group">
-                                <label for="dog_breed">Порода</label>
-                                <select class="form-control" size="1" name="dog_breed" id="dog_breed" style="width:23%;"
-                                        required>
-                                    <option value="0" selected disabled>Выберите породу</option>
-                                    <? foreach ($breeds as $item): ?>
-                                        <option value="<?= $item['breed_id']; ?>"><?= $item['breed_name']; ?></option>
-                                    <? endforeach; ?>
-                                </select>
-                            </div>
+                            <table style="width:77%;">
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="dog_breed">Порода</label>
+                                            <select class="form-control" size="1" name="dog_breed" id="dog_breed" style="width:60%;"
+                                                    required>
+                                                <option value="0" selected disabled>Выберите породу</option>
+                                                <? foreach ($breeds as $item): ?>
+                                                    <option value="<?= $item['breed_id']; ?>"><?= $item['breed_name']; ?></option>
+                                                <? endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a class="breadcrumb add" href="/admin/breeds/create_breed">Добавить породу</a>
+                                    </td>
+                                </tr>
+                            </table>
 
                             <!-- date input -->
                             <div class="form-group">

@@ -27,7 +27,7 @@
                             </div>
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Краткое описание сайта до 160 символов (необходимо для поисковиков).</label>
+                                <label>Краткое описание сайта от 70 до 160 символов (необходимо для поисковиков).</label>
                                 <input class="form-control" name="set_desc" value="<?php echo $about['set_desc']; ?>"
                                        type="text">
                             </div>
