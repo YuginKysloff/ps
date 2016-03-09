@@ -93,16 +93,31 @@
                 <small class="label pull-right bg-blue"><?php echo $count['users'];?></small>
               </a>
             </li>
-            <li class="treeview <?if(($this->uri->segment(2) == 'dogs') OR ($this->uri->segment(2) == 'services')):?>active<?endif?>">
+            <li class="treeview <?if(($this->uri->segment(2) == 'dogs')
+                OR ($this->uri->segment(2) == 'services')
+                OR ($this->uri->segment(2) == 'breeds')
+                OR ($this->uri->segment(2) == 'pets')):?>active<?endif?>">
               <a href="#">
-                <i class="fa fa-shopping-cart"></i> <span>Каталог</span>
+                <i class="fa fa-paw"></i> <span>Животные</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul style="display: none;" class="treeview-menu">
                 <li>
+                  <a href="/admin/breeds">
+                    <i class="fa fa-circle-o"></i> <span>Породы</span>
+                    <small class="label pull-right bg-blue"><?php echo $count['breeds'];?></small>
+                  </a>
+                </li>
+                <li>
                   <a href="/admin/dogs">
-                    <i class="fa fa-circle-o"></i> <span>Животные</span>
+                    <i class="fa fa-circle-o"></i> <span>Собаки</span>
                     <small class="label pull-right bg-blue"><?php echo $count['dogs'];?></small>
+                  </a>
+                </li>
+                <li>
+                  <a href="/admin/pets">
+                    <i class="fa fa-circle-o"></i> <span>Щенки</span>
+                    <small class="label pull-right bg-blue"><?php echo $count['pets'];?></small>
                   </a>
                 </li>
                 <li class="">

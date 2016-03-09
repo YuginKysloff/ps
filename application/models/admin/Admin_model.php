@@ -18,6 +18,8 @@ class Admin_model extends CI_Model {
         $count_data['users'] = $this->db->count_all('users')-1;
         $count_data['visitors'] = $this->db->count_all('hits');
         $count_data['dogs'] = $this->db->count_all('dogs');
+        $count_data['pets'] = $this->db->count_all('pets');
+        $count_data['breeds'] = $this->db->count_all('breeds');
         $count_data['services'] = $this->db->count_all('services');
         $count_data['diploms'] = $this->db->count_all('diploms');
         $count_data['team'] = $this->db->count_all('team');
@@ -203,6 +205,11 @@ class Admin_model extends CI_Model {
 
         $query = $this->db->get_where('dogs', array('dog_id' => $dog_id))->row_array();
         return $query;
+    }
+
+    public function get_breeds()
+    {
+        return $query = $this->db->get('breeds')->result_array();
     }
 
     //Create dog --------------------------------------------------------------------------------------------------------------------

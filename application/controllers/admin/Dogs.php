@@ -32,7 +32,8 @@ class Dogs extends MY_Controller
         if ($this->input->post('submit')) {
             $this->Admin_model->create_dog_handler();
         } else {
-            $this->admin_render('dogs', 'create_dog', NULL);
+            $data['breeds'] = $this->Admin_model->get_breeds();
+            $this->admin_render('dogs', 'create_dog', $data);
         }
     }
 
@@ -50,6 +51,7 @@ class Dogs extends MY_Controller
         if ($this->input->post('submit')) {
             $this->Admin_model->edit_dog_handler($dog_id);
         } else {
+            $data['breeds'] = $this->Admin_model->get_breeds();
             $data['dog'] = $this->Admin_model->get_dogs($dog_id);
             $this->admin_render('dogs', 'edit_dog', $data);
         }

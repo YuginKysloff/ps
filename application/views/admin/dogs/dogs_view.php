@@ -35,13 +35,13 @@
                                     <td class="center operations"><?php echo $i++; ?></td>
                                     <td class="center"><?php echo $item['dog_name']; ?></td>
                                     <td class="center"><?php echo $item['dog_gender'] ? 'м' : 'ж'; ?></td>
-                                    <td class="center"><?php echo round((time() - $item['dog_birthday']) / 604800, 1); ?>
-                                        нед
+                                    <td class="center"><?php echo round((time() - $item['dog_birthday']) / 31536000, 1); ?>
+                                        г.
                                     </td>
                                     <td class="center"><?php echo $item['dog_breed']; ?></td>
                                     <td class="center"><img class="img-thumbnail" src="<?php echo $item['dog_img']; ?>"
                                                             alt="<?php echo $item['dog_name']; ?>" width="200"></td>
-                                    <td class="center"><?php echo $item['dog_status'] ? 'в наличии' : 'резерв'; ?></td>
+                                    <td class="center"><?php echo $item['dog_status'] ? 'активна' : 'неактивна'; ?></td>
                                     <td class="center operations">
                                         <a href="/admin/dogs/edit_dog/<?php echo $item['dog_id']; ?>"
                                            title="Редактировать щенка">
